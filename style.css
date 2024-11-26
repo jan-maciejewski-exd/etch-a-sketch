@@ -7,11 +7,16 @@ body {
 div {
     margin: 0;
     padding: 0;
-    border: solid white 1px;
+    /* border: solid white 1px; */
     min-width: 20px;
     min-height: 20px;
 }
 
 .gridContainer {
     flex-direction: column;
+}
+
+.subcontainer {
+    display: flex;
+    flex-direction: row;
 }
