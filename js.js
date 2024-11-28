@@ -7,51 +7,52 @@ const gridSizeBtn = document.querySelector(".gridSizeBtn");
 gridSizeBtn.addEventListener("click", () => {
     let newSize = parseInt(prompt("Choose new grid base between 1 and 100"));
     while (isNaN(newSize) || newSize > 100 || newSize < 1) {
-        newSize = prompt("Choose more wisely");
-    };    
+        newSize = parseInt(prompt("Choose more wisely (1-100):"));
+    }
     gridSize = newSize;
-    theGrid = createGrid(gridSize);
-})
+    createGrid(gridSize); // Corrected to call the function directly
+});
 
-// Create a 16x16 grid. First column of subcontainers
+// Create a grid with dynamic size
 function createGrid(size) {
     // Clear the container contents
     container.innerHTML = "";
 
+    // Generate rows and columns
     for (let i = 0; i < size; i++) {
-        subcontainer = document.createElement("div");
+        const subcontainer = document.createElement("div");
         subcontainer.classList.add('subcontainer');
         container.appendChild(subcontainer);
         
-        // Create 16 divs within as columns
         for (let j = 0; j < size; j++) {
             const newDiv = document.createElement("div");
             newDiv.classList.add('horizontalDiv');
             subcontainer.appendChild(newDiv);
-            
         }
     }
-    // Select grid cells and listen for mouse hovering
-    cells = document.querySelectorAll('.horizontalDiv');
-    
+
+    // Add hover effects to all cells
+    const cells = container.querySelectorAll('.horizontalDiv'); // Local scope
     cells.forEach((cell) => {
         cell.style.opacity = 0.1;
 
         cell.addEventListener("mouseover", () => {
             cell.style.backgroundColor = "green";
-            cell.style.opacity = parseFloat(cell.style.opacity) + 0.2
-        })
-    })
-    
-};
+            cell.style.opacity = Math.min(parseFloat(cell.style.opacity) + 0.1, 1);
+        });
+    });
+}
 
-
+// Initial grid creation
 createGrid(gridSize);
 
+// Reset button functionality
 const resetBtn = document.querySelector(".resetBtn");
 
 resetBtn.addEventListener("click", () => {
+    const cells = container.querySelectorAll('.horizontalDiv'); // Ensure latest reference
     cells.forEach((cell) => {
         cell.style.backgroundColor = null;
-    })
-})
+        cell.style.opacity = 0.1; // Reset opacity as well
+    });
+});
