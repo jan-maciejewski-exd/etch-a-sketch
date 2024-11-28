@@ -39,7 +39,7 @@ function createGrid(size) {
 
         cell.addEventListener("mouseover", () => {
             cell.style.backgroundColor = "green";
-            cell.style.opacity = parseFloat(cell.style.opacity) + 0.2
+            cell.style.opacity = parseFloat(cell.style.opacity) + 0.1
         })
     })
     

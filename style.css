@@ -15,7 +15,6 @@ div {
     justify-content: stretch;
     width: 960px;
     height: 960px;
-    border: solid red 10px;
 }
 
 .subcontainer {
